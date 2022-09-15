@@ -51,14 +51,6 @@ def get_avg_info_of_attribute(df, attribute):
 
         avg_info += (internalCount/count)*get_entropy_of_dataset(splitDF)
         print(avg_info)
-
-    # for values in attrDict.values():
-    #     print(values)
-    #     yes = values.count("yes")
-    #     no = values.count("no")
-    #     avg_info += ((yes+no)/count)*entropy_attr(yes, no)
-    #     print(yes, no)
-    #     print(attribute, avg_info)
     return avg_info
 
 
