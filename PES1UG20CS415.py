@@ -3,6 +3,7 @@ Assume df is a pandas dataframe object of the dataset given
 '''
 
 from math import log2
+from optparse import IndentedHelpFormatter
 import numpy as np
 import pandas as pd
 import random
@@ -48,9 +49,8 @@ def get_avg_info_of_attribute(df, attribute):
         internalCount = 0
         for i in splitDF.iterrows():
             internalCount += 1
-
         avg_info += (internalCount/count)*get_entropy_of_dataset(splitDF)
-        print(avg_info)
+
     return avg_info
 
 
@@ -61,6 +61,8 @@ def get_avg_info_of_attribute(df, attribute):
 
 def get_information_gain(df, attribute):
     # TODO
+    information_gain = get_entropy_of_dataset(
+        df)-get_avg_info_of_attribute(df, attribute)
     return information_gain
 
 
@@ -75,11 +77,3 @@ def get_selected_attribute(df):
     '''
     # TODO
     pass
-
-
-# def entropy_attr(yes, no):
-#     if yes == 0 or no == 0:
-#         return 1
-#     ans = -(yes/(yes+no))*log2(yes/(yes+no)) - \
-#         (no/(yes+no))*log2(no/(yes+no))
-#     return (ans)
