@@ -33,16 +33,18 @@ def get_entropy_of_dataset(df):
 
 def get_avg_info_of_attribute(df, attribute):
     # TODO
-    # attrDict = {}
-    # avg_info = 0
-    # count = 0
-    # for index, row in df.iterrows():
-    #     attrDict[row[attribute]] = []
-    #     count += 1
+    attrDict = {}
+    avg_info = 0
+    count = 0
+    for index, row in df.iterrows():
+        attrDict[row[attribute]] = []
+        count += 1
 
-    # for index, row in df.iterrows():
-    #     attrDict[row[attribute]].append(row[-1])
+    for index, row in df.iterrows():
+        attrDict[row[attribute]].append(row[-1])
 
+    splitDF = pd.DataFrame(attrDict)
+    print(splitDF)
     # for values in attrDict.values():
     #     print(values)
     #     yes = values.count("yes")
@@ -76,9 +78,9 @@ def get_selected_attribute(df):
     pass
 
 
-def entropy_attr(yes, no):
-    if yes == 0 or no == 0:
-        return 1
-    ans = -(yes/(yes+no))*log2(yes/(yes+no)) - \
-        (no/(yes+no))*log2(no/(yes+no))
-    return (ans)
+# def entropy_attr(yes, no):
+#     if yes == 0 or no == 0:
+#         return 1
+#     ans = -(yes/(yes+no))*log2(yes/(yes+no)) - \
+#         (no/(yes+no))*log2(no/(yes+no))
+#     return (ans)
