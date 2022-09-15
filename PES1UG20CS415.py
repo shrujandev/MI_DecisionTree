@@ -2,6 +2,7 @@
 Assume df is a pandas dataframe object of the dataset given
 '''
 
+from math import log2
 import numpy as np
 import pandas as pd
 import random
@@ -10,14 +11,30 @@ import random
 '''Calculate the entropy of the enitre dataset'''
 # input:pandas_dataframe
 # output:int/float
+
+
 def get_entropy_of_dataset(df):
+    print(df)
     # TODO
+    yes = 0
+    no = 0
+    for index, row in df.iterrows():
+        print(index, row)
+        if row[-1] == "yes":
+            yes += 1
+        else:
+            no += 1
+
+    entropy = -(yes/(yes+no))*log2(yes/(yes+no)) - \
+        (no/(yes+no))*log2(no/(yes+no))
     return entropy
 
 
 '''Return avg_info of the attribute provided as parameter'''
 # input:pandas_dataframe,str   {i.e the column name ,ex: Temperature in the Play tennis dataset}
 # output:int/float
+
+
 def get_avg_info_of_attribute(df, attribute):
     # TODO
     return avg_info
@@ -26,11 +43,11 @@ def get_avg_info_of_attribute(df, attribute):
 '''Return Information Gain of the attribute provided as parameter'''
 # input:pandas_dataframe,str
 # output:int/float
+
+
 def get_information_gain(df, attribute):
     # TODO
     return information_gain
-
-
 
 
 #input: pandas_dataframe
