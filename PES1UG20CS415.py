@@ -75,5 +75,9 @@ def get_selected_attribute(df):
     example : ({'A':0.123,'B':0.768,'C':1.23} , 'C')
     '''
     # TODO
+    infogainDict = {}
+    for attributes in list(df)[:-1]:
+        infogainDict[attributes] = get_information_gain(df, attributes)
 
-    pass
+    detail = (infogainDict, max(infogainDict, key=infogainDict.get))
+    return detail
