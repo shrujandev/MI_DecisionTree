@@ -3,7 +3,6 @@ Assume df is a pandas dataframe object of the dataset given
 '''
 
 from math import log2
-from optparse import IndentedHelpFormatter
 import numpy as np
 import pandas as pd
 import random
@@ -76,4 +75,5 @@ def get_selected_attribute(df):
     example : ({'A':0.123,'B':0.768,'C':1.23} , 'C')
     '''
     # TODO
+
     pass
