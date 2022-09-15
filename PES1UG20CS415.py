@@ -17,12 +17,13 @@ def get_entropy_of_dataset(df):
     # TODO
     entropy = 0
     count = 0
-    tar = df.columns[-1]
-    array_st = df[tar].value_counts()
+    pred = df.columns[-1]
+    array_st = df[pred].value_counts()
     for i in array_st:
         count += i
     for med in array_st:
-        entropy += -(med/count)*log2(med/count)
+        if med != 0:
+            entropy += (-(med/count)*log2(med/count))
     return entropy
 
 
@@ -39,12 +40,18 @@ def get_avg_info_of_attribute(df, attribute):
     for index, row in df.iterrows():
         attrDict[row[attribute]] = []
         count += 1
-
     for index, row in df.iterrows():
         attrDict[row[attribute]].append(row[-1])
 
-    splitDF = pd.DataFrame(attrDict)
-    print(splitDF)
+    for key in attrDict.keys():
+        splitDF = df[df[attribute] == key]
+        internalCount = 0
+        for i in splitDF.iterrows():
+            internalCount += 1
+
+        avg_info += (internalCount/count)*get_entropy_of_dataset(splitDF)
+        print(avg_info)
+
     # for values in attrDict.values():
     #     print(values)
     #     yes = values.count("yes")
@@ -65,11 +72,11 @@ def get_information_gain(df, attribute):
     return information_gain
 
 
-#input: pandas_dataframe
-#output: ({dict},'str')
+# input: pandas_dataframe
+# output: ({dict},'str')
 def get_selected_attribute(df):
     '''
-    Return a tuple with the first element as a dictionary which has IG of all columns 
+    Return a tuple with the first element as a dictionary which has IG of all columns
     and the second element as a string with the name of the column selected
 
     example : ({'A':0.123,'B':0.768,'C':1.23} , 'C')
