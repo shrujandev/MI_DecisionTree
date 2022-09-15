@@ -14,19 +14,15 @@ import random
 
 
 def get_entropy_of_dataset(df):
-    print(df)
     # TODO
-    yes = 0
-    no = 0
-    for index, row in df.iterrows():
-        print(index, row)
-        if row[-1] == "yes":
-            yes += 1
-        else:
-            no += 1
-
-    entropy = -(yes/(yes+no))*log2(yes/(yes+no)) - \
-        (no/(yes+no))*log2(no/(yes+no))
+    entropy = 0
+    count = 0
+    tar = df.columns[-1]
+    array_st = df[tar].value_counts()
+    for i in array_st:
+        count += i
+    for med in array_st:
+        entropy += -(med/count)*log2(med/count)
     return entropy
 
 
@@ -37,6 +33,23 @@ def get_entropy_of_dataset(df):
 
 def get_avg_info_of_attribute(df, attribute):
     # TODO
+    # attrDict = {}
+    # avg_info = 0
+    # count = 0
+    # for index, row in df.iterrows():
+    #     attrDict[row[attribute]] = []
+    #     count += 1
+
+    # for index, row in df.iterrows():
+    #     attrDict[row[attribute]].append(row[-1])
+
+    # for values in attrDict.values():
+    #     print(values)
+    #     yes = values.count("yes")
+    #     no = values.count("no")
+    #     avg_info += ((yes+no)/count)*entropy_attr(yes, no)
+    #     print(yes, no)
+    #     print(attribute, avg_info)
     return avg_info
 
 
@@ -61,3 +74,11 @@ def get_selected_attribute(df):
     '''
     # TODO
     pass
+
+
+def entropy_attr(yes, no):
+    if yes == 0 or no == 0:
+        return 1
+    ans = -(yes/(yes+no))*log2(yes/(yes+no)) - \
+        (no/(yes+no))*log2(no/(yes+no))
+    return (ans)
